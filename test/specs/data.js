@@ -29,10 +29,11 @@ async function data( table ) {
 
 describe( 'Developers/Maintainers', () => {
 	it( 'should output data', async () => {
-		await browser.url( 'w/index.php?title=Developers/Maintainers' ); // current
+		await browser.url( 'w/index.php?title=Developers/Maintainers' ); // 2022-09-27
 		// await browser.url( 'w/index.php?title=Developers/Maintainers&oldid=5323169' ); // 2022-07-06
 		// await browser.url( 'w/index.php?title=Developers/Maintainers&oldid=5146289' ); // 2022-04-04
 		// await browser.url( 'w/index.php?title=Developers/Maintainers&oldid=5009838' ); // 2022-01-09
+		// await browser.url( 'w/index.php?title=Developers/Maintainers&oldid=4842249' ); // 2021-10-01
 		const tables = $$( 'table.sortable' );
 		await tables.map( ( table ) => data( table ) );
 		output( totalComponents, totalUnassigned );
