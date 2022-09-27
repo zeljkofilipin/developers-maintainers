@@ -8,9 +8,11 @@ function percentage( components, unassigned ) {
 }
 
 function output( components, unassigned ) {
+	outputDelimiter();
 	console.log( 'Components: ' + components );
 	console.log( 'Unassigned: ' + unassigned );
 	console.log( '         %:  ' + percentage( components, unassigned ) );
+	outputDelimiter();
 }
 
 function outputDelimiter() {
@@ -34,6 +36,5 @@ describe( 'Developers/Maintainers', () => {
 		const tables = $$( 'table.sortable' );
 		await tables.map( ( table ) => data( table ) );
 		output( totalComponents, totalUnassigned );
-		outputDelimiter();
 	} );
 } );
