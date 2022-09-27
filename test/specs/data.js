@@ -21,7 +21,7 @@ describe( 'Developers/Maintainers', () => {
 		await table( 'MediaWiki core libraries', 33 );
 		await table( 'MediaWiki extension libraries', 35 );
 		await table( 'Services and administration', 45 );
-		// await table( 'Data Engineering', 52);
+		await table( 'Data Engineering', 50 );
 		await table( 'Misc', 52 );
 		console.log( '------------------------------------------------------------------------------------------------------------------------' );
 	} );
