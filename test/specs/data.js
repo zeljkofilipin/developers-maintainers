@@ -16,7 +16,13 @@ async function table( name, int ) {
 describe( 'Developers/Maintainers', () => {
 	it( 'should output data', async () => {
 		await browser.url( '' );
-		await table( 'Core', 17 );
-		await table( 'Extensions', 22 );
+		await table( 'MediaWiki core', 17 );
+		await table( 'MediaWiki extensions', 22 );
+		await table( 'MediaWiki skins', 27 );
+		await table( 'MediaWiki core libraries', 33);
+		await table( 'MediaWiki extension libraries', 35);
+		await table( 'Services and administration', 45);
+		//await table( 'Data Engineering', 52);
+		await table( 'Misc', 52);
 	} );
 } );
