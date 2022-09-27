@@ -7,27 +7,22 @@ function percentage( components, unassigned ) {
 	return ( unassigned / components * 100 ).toFixed( 0 );
 }
 
-function output( name, components, unassigned ) {
-	console.log( name );
-	console.log( '- Components: ' + components );
-	console.log( '- Unassigned: ' + unassigned );
-	console.log( '-          %: ' + percentage( components, unassigned ) );
+function output( components, unassigned ) {
+	console.log( 'Components: ' + components );
+	console.log( 'Unassigned: ' + unassigned );
+	console.log( '         %:  ' + percentage( components, unassigned ) );
 }
 
 function outputDelimiter() {
 	console.log( '------------------------------------------------------------------------------------------------------------------------' );
 }
 
-async function table( name, int ) {
-	const selector = `table.wikitable:nth-child(${int})`;
-
-	const components = ( await $( selector ).$$( 'tr' ).length - 1 );
+async function data( table ) {
+	const components = ( await table.$$( 'tr' ).length - 1 );
 	totalComponents = totalComponents + components;
 
-	const unassigned = await $( selector ).$$( 'td=Unassigned' ).length;
+	const unassigned = await table.$$( 'td=Unassigned' ).length;
 	totalUnassigned = totalUnassigned + unassigned;
-
-	output( name, components, unassigned );
 }
 
 describe( 'Developers/Maintainers', () => {
@@ -36,16 +31,9 @@ describe( 'Developers/Maintainers', () => {
 		// await browser.url( 'w/index.php?title=Developers/Maintainers&oldid=5323169' ); // 2022-07-06
 		// await browser.url( 'w/index.php?title=Developers/Maintainers&oldid=5146289' ); // 2022-04-04
 		// await browser.url( 'w/index.php?title=Developers/Maintainers&oldid=5009838' ); // 2022-01-09
-		outputDelimiter();
-		await table( 'MediaWiki core', 17 );
-		await table( 'MediaWiki extensions', 22 );
-		await table( 'MediaWiki skins', 27 );
-		await table( 'MediaWiki core libraries', 33 );
-		await table( 'MediaWiki extension libraries', 35 );
-		await table( 'Services and administration', 45 );
-		await table( 'Data Engineering', 50 );
-		await table( 'Misc', 52 );
-		output( 'Total', totalComponents, totalUnassigned );
+		const tables = $$( 'table.sortable' );
+		await tables.map( ( table ) => data( table ) );
+		output( totalComponents, totalUnassigned );
 		outputDelimiter();
 	} );
 } );
