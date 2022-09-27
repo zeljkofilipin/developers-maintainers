@@ -1,20 +1,39 @@
 'use strict';
 
-async function table( name, int ) {
-	const selector = `table.wikitable:nth-child(${int})`;
-	const components = ( await $( selector ).$$( 'tr' ).length - 1 );
-	const unassigned = await $( selector ).$$( 'td=Unassigned' ).length;
-	const percentage = ( unassigned / components * 100 ).toFixed( 0 );
+let totalComponents = 0;
+let totalUnassigned = 0;
+
+function percentage( components, unassigned ) {
+	return ( unassigned / components * 100 ).toFixed( 0 );
+}
+
+function output( name, components, unassigned ) {
 	console.log( name );
 	console.log( '- Components: ' + components );
 	console.log( '- Unassigned: ' + unassigned );
-	console.log( '-          %: ' + percentage );
+	console.log( '-          %: ' + percentage( components, unassigned ) );
+}
+
+function outputDelimiter() {
+	console.log( '------------------------------------------------------------------------------------------------------------------------' );
+}
+
+async function table( name, int ) {
+	const selector = `table.wikitable:nth-child(${int})`;
+
+	const components = ( await $( selector ).$$( 'tr' ).length - 1 );
+	totalComponents = totalComponents + components;
+
+	const unassigned = await $( selector ).$$( 'td=Unassigned' ).length;
+	totalUnassigned = totalUnassigned + unassigned;
+
+	output( name, components, unassigned );
 }
 
 describe( 'Developers/Maintainers', () => {
 	it( 'should output data', async () => {
 		await browser.url( '' );
-		console.log( '------------------------------------------------------------------------------------------------------------------------' );
+		outputDelimiter();
 		await table( 'MediaWiki core', 17 );
 		await table( 'MediaWiki extensions', 22 );
 		await table( 'MediaWiki skins', 27 );
@@ -23,6 +42,7 @@ describe( 'Developers/Maintainers', () => {
 		await table( 'Services and administration', 45 );
 		await table( 'Data Engineering', 50 );
 		await table( 'Misc', 52 );
-		console.log( '------------------------------------------------------------------------------------------------------------------------' );
+		output( 'Total', totalComponents, totalUnassigned );
+		outputDelimiter();
 	} );
 } );
