@@ -32,7 +32,10 @@ async function table( name, int ) {
 
 describe( 'Developers/Maintainers', () => {
 	it( 'should output data', async () => {
-		await browser.url( '' );
+		await browser.url( 'w/index.php?title=Developers/Maintainers' ); // current
+		// await browser.url( 'w/index.php?title=Developers/Maintainers&oldid=5323169' ); // 2022-07-06
+		// await browser.url( 'w/index.php?title=Developers/Maintainers&oldid=5146289' ); // 2022-04-04
+		// await browser.url( 'w/index.php?title=Developers/Maintainers&oldid=5009838' ); // 2022-01-09
 		outputDelimiter();
 		await table( 'MediaWiki core', 17 );
 		await table( 'MediaWiki extensions', 22 );
