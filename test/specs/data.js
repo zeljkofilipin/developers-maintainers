@@ -41,6 +41,14 @@ const dates = [
 let totalComponents;
 let totalUnassigned;
 
+function data( table ) {
+	const components = ( table.$$( 'tr' ).length - 1 );
+	totalComponents = totalComponents + components;
+
+	const unassigned = table.$$( 'td=Unassigned' ).length;
+	totalUnassigned = totalUnassigned + unassigned;
+}
+
 function percentage( components, unassigned ) {
 	return ( unassigned / components * 100 ).toFixed( 0 );
 }
@@ -56,14 +64,6 @@ function output( date, components, unassigned ) {
 
 function outputDelimiter() {
 	console.log( '------------------------------------------------------------------------------------------------------------------------' );
-}
-
-function data( table ) {
-	const components = ( table.$$( 'tr' ).length - 1 );
-	totalComponents = totalComponents + components;
-
-	const unassigned = table.$$( 'td=Unassigned' ).length;
-	totalUnassigned = totalUnassigned + unassigned;
 }
 
 describe( 'Developers/Maintainers', () => {
