@@ -77,7 +77,7 @@ function chart( x, y, yAxisTitle ) {
 	return `{{Graph:Chart|width=1200|height=100|xAxisTitle=Date|yAxisTitle=${yAxisTitle}|type=rect|showValues=|x=${x}|y=${y}}}`;
 }
 
-function componentsAndUnassignedfromPages() {
+function componentsAndUnassignedFromPages() {
 	const componentsAndUnassigned = pages.map( ( date ) => {
 		totalComponents = 0;
 		totalUnassigned = 0;
@@ -91,7 +91,7 @@ function componentsAndUnassignedfromPages() {
 
 describe( 'Developers/Maintainers', () => {
 	it( 'should create charts', () => {
-		const componentsAndUnassigned = componentsAndUnassignedfromPages( pages );
+		const componentsAndUnassigned = componentsAndUnassignedFromPages( pages );
 		console.log( chart( x( pages ), yComponents( componentsAndUnassigned ), 'Components' ) );
 		console.log( chart( x( pages ), yUnassigned( componentsAndUnassigned ), 'Unassigned' ) );
 		console.log( chart( x( pages ), yUnassignedPercentage( componentsAndUnassigned ), 'Unassigned %' ) );
