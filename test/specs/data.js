@@ -84,7 +84,7 @@ describe( 'Developers/Maintainers', () => {
 			totalUnassigned = 0;
 			browser.url( `w/index.php?title=Developers/Maintainers&oldid=${date.oldid}` );
 			const tables = $$( 'table.sortable' );
-			tables.map( ( table ) => componentsAndUnassignedFromTable( table ) );
+			tables.forEach( ( table ) => componentsAndUnassignedFromTable( table ) );
 			return { components: totalComponents, unassigned: totalUnassigned };
 		} );
 		console.log( chart( x( pages ), yComponents( componentsAndUnassigned ), 'Components' ) );
