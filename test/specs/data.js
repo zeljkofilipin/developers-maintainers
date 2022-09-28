@@ -77,16 +77,19 @@ function chart( x, y, yAxisTitle ) {
 	return `{{Graph:Chart|width=1200|height=100|xAxisTitle=Date|yAxisTitle=${yAxisTitle}|type=rect|showValues=|x=${x}|y=${y}}}`;
 }
 
-function componentsAndUnassignedFromPages() {
-	const componentsAndUnassigned = pages.map( ( page ) => {
-		totalComponents = 0;
-		totalUnassigned = 0;
-		browser.url( `w/index.php?title=Developers/Maintainers&oldid=${page.oldid}` );
-		const tables = $$( 'table.sortable' );
-		tables.forEach( ( table ) => componentsAndUnassignedFromTable( table ) );
-		return { components: totalComponents, unassigned: totalUnassigned };
+function componentsAndUnassignedFromPage( page ) {
+	totalComponents = 0;
+	totalUnassigned = 0;
+	browser.url( `w/index.php?title=Developers/Maintainers&oldid=${page.oldid}` );
+	const tables = $$( 'table.sortable' );
+	tables.forEach( ( table ) => componentsAndUnassignedFromTable( table ) );
+	return { components: totalComponents, unassigned: totalUnassigned };
+}
+
+function componentsAndUnassignedFromPages( pages ) {
+	return pages.map( ( page ) => {
+		return componentsAndUnassignedFromPage( page );
 	} );
-	return componentsAndUnassigned;
 }
 
 describe( 'Developers/Maintainers', () => {
