@@ -41,12 +41,17 @@ const datesOldids = [
 let totalComponents;
 let totalUnassigned;
 
-function data( table ) {
-	const components = ( table.$$( 'tr' ).length - 1 );
-	totalComponents = totalComponents + components;
+function componentsFromTable( table ) {
+	return ( table.$$( 'tr' ).length - 1 );
+}
 
-	const unassigned = table.$$( 'td=Unassigned' ).length;
-	totalUnassigned = totalUnassigned + unassigned;
+function unassignedFromTable( table ) {
+	return table.$$( 'td=Unassigned' ).length;
+}
+
+function componentsAndUnassignedFromTable( table ) {
+	totalComponents = totalComponents + componentsFromTable( table );
+	totalUnassigned = totalUnassigned + unassignedFromTable( table );
 }
 
 function percentage( components, unassigned ) {
@@ -79,7 +84,7 @@ describe( 'Developers/Maintainers', () => {
 			totalUnassigned = 0;
 			browser.url( `w/index.php?title=Developers/Maintainers&oldid=${date.oldid}` );
 			const tables = $$( 'table.sortable' );
-			tables.map( ( table ) => data( table ) );
+			tables.map( ( table ) => componentsAndUnassignedFromTable( table ) );
 			return { components: totalComponents, unassigned: totalUnassigned };
 		} );
 		console.log( components( x( datesOldids ), yComponents( componentsUnassigned ), 'Components' ) );
