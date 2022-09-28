@@ -20,8 +20,9 @@ function percentage( components, unassigned ) {
 	return ( unassigned / components * 100 ).toFixed( 0 );
 }
 
-function output( components, unassigned ) {
+function output( date, components, unassigned ) {
 	outputDelimiter();
+	console.log( 'Date      : ' + date );
 	console.log( 'Components: ' + components );
 	console.log( 'Unassigned: ' + unassigned );
 	console.log( '         %:  ' + percentage( components, unassigned ) );
@@ -48,7 +49,7 @@ describe( 'Developers/Maintainers', () => {
 			browser.url( `w/index.php?title=Developers/Maintainers&oldid=${date.oldid}` );
 			const tables = $$( 'table.sortable' );
 			tables.map( ( table ) => data( table ) );
-			output( totalComponents, totalUnassigned );
+			output( date.date, totalComponents, totalUnassigned );
 		} );
 	} );
 } );
