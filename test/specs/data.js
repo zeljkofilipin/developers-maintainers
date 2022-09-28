@@ -73,7 +73,7 @@ function yUnassignedPercentage( data ) {
 	return data.map( ( datum ) => percentage( datum.components, datum.unassigned ) ).join();
 }
 
-function components( x, y, yAxisTitle ) {
+function chart( x, y, yAxisTitle ) {
 	return `{{Graph:Chart|width=1200|height=100|xAxisTitle=Date|yAxisTitle=${yAxisTitle}|type=rect|showValues=|x=${x}|y=${y}}}`;
 }
 
@@ -87,8 +87,8 @@ describe( 'Developers/Maintainers', () => {
 			tables.map( ( table ) => componentsAndUnassignedFromTable( table ) );
 			return { components: totalComponents, unassigned: totalUnassigned };
 		} );
-		console.log( components( x( pages ), yComponents( componentsAndUnassigned ), 'Components' ) );
-		console.log( components( x( pages ), yUnassigned( componentsAndUnassigned ), 'Unassigned' ) );
-		console.log( components( x( pages ), yUnassignedPercentage( componentsAndUnassigned ), 'Unassigned %' ) );
+		console.log( chart( x( pages ), yComponents( componentsAndUnassigned ), 'Components' ) );
+		console.log( chart( x( pages ), yUnassigned( componentsAndUnassigned ), 'Unassigned' ) );
+		console.log( chart( x( pages ), yUnassignedPercentage( componentsAndUnassigned ), 'Unassigned %' ) );
 	} );
 } );
