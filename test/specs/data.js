@@ -1,6 +1,6 @@
 'use strict';
 
-const dates = [
+const datesOldids = [
 	{ date: '2019-01-03',
 		oldid: '3036807' },
 	{ date: '2019-04-24',
@@ -53,28 +53,37 @@ function percentage( components, unassigned ) {
 	return ( unassigned / components * 100 ).toFixed( 0 );
 }
 
-function output( date, components, unassigned ) {
-	outputDelimiter();
-	console.log( 'Date      : ' + date );
-	console.log( 'Components: ' + components );
-	console.log( 'Unassigned: ' + unassigned );
-	console.log( '         %:  ' + percentage( components, unassigned ) );
-	outputDelimiter();
+function x( dates ) {
+	return dates.map( ( date ) => date.date ).join();
 }
 
-function outputDelimiter() {
-	console.log( '--------------------------------------------------------------------------------' );
+function yComponents( data ) {
+	return data.map( ( datum ) => datum.components ).join();
+}
+function yUnassigned( data ) {
+	return data.map( ( datum ) => datum.unassigned ).join();
+}
+
+function yUnassignedPercentage( data ) {
+	return data.map( ( datum ) => percentage( datum.components, datum.unassigned ) ).join();
+}
+
+function components( x, y, yAxisTitle ) {
+	return `{{Graph:Chart|width=1200|height=100|xAxisTitle=Date|yAxisTitle=${yAxisTitle}|type=rect|showValues=|x=${x}|y=${y}}}`;
 }
 
 describe( 'Developers/Maintainers', () => {
 	it( 'should output data', () => {
-		dates.forEach( ( date ) => {
+		const componentsUnassigned = datesOldids.map( ( date ) => {
 			totalComponents = 0;
 			totalUnassigned = 0;
 			browser.url( `w/index.php?title=Developers/Maintainers&oldid=${date.oldid}` );
 			const tables = $$( 'table.sortable' );
 			tables.map( ( table ) => data( table ) );
-			output( date.date, totalComponents, totalUnassigned );
+			return { components: totalComponents, unassigned: totalUnassigned };
 		} );
+		console.log( components( x( datesOldids ), yComponents( componentsUnassigned ), 'Components' ) );
+		console.log( components( x( datesOldids ), yUnassigned( componentsUnassigned ), 'Unassigned' ) );
+		console.log( components( x( datesOldids ), yUnassignedPercentage( componentsUnassigned ), 'Unassigned %' ) );
 	} );
 } );
