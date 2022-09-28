@@ -13,8 +13,8 @@ const dates = [
 		oldid: '5470936' }
 ];
 
-let totalComponents = 0;
-let totalUnassigned = 0;
+let totalComponents;
+let totalUnassigned;
 
 function percentage( components, unassigned ) {
 	return ( unassigned / components * 100 ).toFixed( 0 );
@@ -32,23 +32,23 @@ function outputDelimiter() {
 	console.log( '------------------------------------------------------------------------------------------------------------------------' );
 }
 
-async function data( table ) {
-	const components = ( await table.$$( 'tr' ).length - 1 );
+function data( table ) {
+	const components = ( table.$$( 'tr' ).length - 1 );
 	totalComponents = totalComponents + components;
 
-	const unassigned = await table.$$( 'td=Unassigned' ).length;
+	const unassigned = table.$$( 'td=Unassigned' ).length;
 	totalUnassigned = totalUnassigned + unassigned;
 }
 
 describe( 'Developers/Maintainers', () => {
-	it( 'should output data', async () => {
-		await browser.url( 'w/index.php?title=Developers/Maintainers' ); // 2022-09-27
-		// await browser.url( 'w/index.php?title=Developers/Maintainers&oldid=5323169' ); // 2022-07-06
-		// await browser.url( 'w/index.php?title=Developers/Maintainers&oldid=5146289' ); // 2022-04-04
-		// await browser.url( 'w/index.php?title=Developers/Maintainers&oldid=5009838' ); // 2022-01-09
-		// await browser.url( 'w/index.php?title=Developers/Maintainers&oldid=4842249' ); // 2021-10-01
-		const tables = $$( 'table.sortable' );
-		await tables.map( ( table ) => data( table ) );
-		output( totalComponents, totalUnassigned );
+	it( 'should output data', () => {
+		dates.forEach( ( date ) => {
+			totalComponents = 0;
+			totalUnassigned = 0;
+			browser.url( `w/index.php?title=Developers/Maintainers&oldid=${date.oldid}` );
+			const tables = $$( 'table.sortable' );
+			tables.map( ( table ) => data( table ) );
+			output( totalComponents, totalUnassigned );
+		} );
 	} );
 } );
