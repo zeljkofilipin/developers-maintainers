@@ -81,10 +81,9 @@ function componentsAndUnassignedFromPage( page ) {
 	browser.url( `w/index.php?title=Developers/Maintainers&oldid=${page.oldid}` );
 	const tables = $$( 'table.sortable' );
 
-	totalUnassigned = 0;
-
 	tables.forEach( ( table ) => componentsAndUnassignedFromTable( table ) );
-	return { components: componentsFromTables( tables ), unassigned: totalUnassigned };
+	return { components: componentsFromTables( tables ),
+		unassigned: unassignedFromTables( tables ) };
 }
 
 function componentsAndUnassignedFromPages( pages ) {
@@ -95,6 +94,12 @@ function componentsAndUnassignedFromPages( pages ) {
 
 function unassignedFromTable( table ) {
 	return table.$$( 'td=Unassigned' ).length;
+}
+
+function unassignedFromTables( tables ) {
+	return tables.map( ( table ) => unassignedFromTable( table ) ).reduce( ( total, current ) => {
+		return total + current;
+	}, 0 );
 }
 
 describe( 'Developers/Maintainers', () => {
