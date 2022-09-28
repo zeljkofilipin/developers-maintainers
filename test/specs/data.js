@@ -38,8 +38,6 @@ const pages = [
 		oldid: '5470936' }
 ];
 
-let totalUnassigned;
-
 function chart( x, y, yAxisTitle ) {
 	return `{{Graph:Chart|width=1200|height=100|xAxisTitle=Date|yAxisTitle=${yAxisTitle}|type=rect|showValues=|x=${x}|y=${y}}}`;
 }
@@ -73,15 +71,10 @@ function componentsFromTables( tables ) {
 	}, 0 );
 }
 
-function componentsAndUnassignedFromTable( table ) {
-	totalUnassigned = totalUnassigned + unassignedFromTable( table );
-}
-
 function componentsAndUnassignedFromPage( page ) {
 	browser.url( `w/index.php?title=Developers/Maintainers&oldid=${page.oldid}` );
 	const tables = $$( 'table.sortable' );
 
-	tables.forEach( ( table ) => componentsAndUnassignedFromTable( table ) );
 	return { components: componentsFromTables( tables ),
 		unassigned: unassignedFromTables( tables ) };
 }
