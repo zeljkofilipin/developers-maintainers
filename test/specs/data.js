@@ -78,7 +78,7 @@ function components( x, y, yAxisTitle ) {
 }
 
 describe( 'Developers/Maintainers', () => {
-	it( 'should output data', () => {
+	it( 'should create charts', () => {
 		const componentsUnassigned = datesOldids.map( ( date ) => {
 			totalComponents = 0;
 			totalUnassigned = 0;
