@@ -79,7 +79,7 @@ function components( x, y, yAxisTitle ) {
 
 describe( 'Developers/Maintainers', () => {
 	it( 'should create charts', () => {
-		const componentsUnassigned = datesOldids.map( ( date ) => {
+		const componentsAndUnassigned = datesOldids.map( ( date ) => {
 			totalComponents = 0;
 			totalUnassigned = 0;
 			browser.url( `w/index.php?title=Developers/Maintainers&oldid=${date.oldid}` );
@@ -87,8 +87,8 @@ describe( 'Developers/Maintainers', () => {
 			tables.map( ( table ) => componentsAndUnassignedFromTable( table ) );
 			return { components: totalComponents, unassigned: totalUnassigned };
 		} );
-		console.log( components( x( datesOldids ), yComponents( componentsUnassigned ), 'Components' ) );
-		console.log( components( x( datesOldids ), yUnassigned( componentsUnassigned ), 'Unassigned' ) );
-		console.log( components( x( datesOldids ), yUnassignedPercentage( componentsUnassigned ), 'Unassigned %' ) );
+		console.log( components( x( datesOldids ), yComponents( componentsAndUnassigned ), 'Components' ) );
+		console.log( components( x( datesOldids ), yUnassigned( componentsAndUnassigned ), 'Unassigned' ) );
+		console.log( components( x( datesOldids ), yUnassignedPercentage( componentsAndUnassigned ), 'Unassigned %' ) );
 	} );
 } );
