@@ -1,6 +1,6 @@
 'use strict';
 
-const datesAndOldids = [
+const pages = [
 	{ date: '2019-01-03',
 		oldid: '3036807' },
 	{ date: '2019-04-24',
@@ -79,7 +79,7 @@ function components( x, y, yAxisTitle ) {
 
 describe( 'Developers/Maintainers', () => {
 	it( 'should create charts', () => {
-		const componentsAndUnassigned = datesAndOldids.map( ( date ) => {
+		const componentsAndUnassigned = pages.map( ( date ) => {
 			totalComponents = 0;
 			totalUnassigned = 0;
 			browser.url( `w/index.php?title=Developers/Maintainers&oldid=${date.oldid}` );
@@ -87,8 +87,8 @@ describe( 'Developers/Maintainers', () => {
 			tables.map( ( table ) => componentsAndUnassignedFromTable( table ) );
 			return { components: totalComponents, unassigned: totalUnassigned };
 		} );
-		console.log( components( x( datesAndOldids ), yComponents( componentsAndUnassigned ), 'Components' ) );
-		console.log( components( x( datesAndOldids ), yUnassigned( componentsAndUnassigned ), 'Unassigned' ) );
-		console.log( components( x( datesAndOldids ), yUnassignedPercentage( componentsAndUnassigned ), 'Unassigned %' ) );
+		console.log( components( x( pages ), yComponents( componentsAndUnassigned ), 'Components' ) );
+		console.log( components( x( pages ), yUnassigned( componentsAndUnassigned ), 'Unassigned' ) );
+		console.log( components( x( pages ), yUnassignedPercentage( componentsAndUnassigned ), 'Unassigned %' ) );
 	} );
 } );
