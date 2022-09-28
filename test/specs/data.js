@@ -78,10 +78,10 @@ function chart( x, y, yAxisTitle ) {
 }
 
 function componentsAndUnassignedFromPages() {
-	const componentsAndUnassigned = pages.map( ( date ) => {
+	const componentsAndUnassigned = pages.map( ( page ) => {
 		totalComponents = 0;
 		totalUnassigned = 0;
-		browser.url( `w/index.php?title=Developers/Maintainers&oldid=${date.oldid}` );
+		browser.url( `w/index.php?title=Developers/Maintainers&oldid=${page.oldid}` );
 		const tables = $$( 'table.sortable' );
 		tables.forEach( ( table ) => componentsAndUnassignedFromTable( table ) );
 		return { components: totalComponents, unassigned: totalUnassigned };
