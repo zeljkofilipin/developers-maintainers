@@ -41,17 +41,8 @@ const pages = [
 let totalComponents;
 let totalUnassigned;
 
-function componentsFromTable( table ) {
-	return ( table.$$( 'tr' ).length - 1 );
-}
-
-function unassignedFromTable( table ) {
-	return table.$$( 'td=Unassigned' ).length;
-}
-
-function componentsAndUnassignedFromTable( table ) {
-	totalComponents = totalComponents + componentsFromTable( table );
-	totalUnassigned = totalUnassigned + unassignedFromTable( table );
+function chart( x, y, yAxisTitle ) {
+	return `{{Graph:Chart|width=1200|height=100|xAxisTitle=Date|yAxisTitle=${yAxisTitle}|type=rect|showValues=|x=${x}|y=${y}}}`;
 }
 
 function percentage( components, unassigned ) {
@@ -73,8 +64,13 @@ function yUnassignedPercentage( data ) {
 	return data.map( ( datum ) => percentage( datum.components, datum.unassigned ) ).join();
 }
 
-function chart( x, y, yAxisTitle ) {
-	return `{{Graph:Chart|width=1200|height=100|xAxisTitle=Date|yAxisTitle=${yAxisTitle}|type=rect|showValues=|x=${x}|y=${y}}}`;
+function componentsFromTable( table ) {
+	return ( table.$$( 'tr' ).length - 1 );
+}
+
+function componentsAndUnassignedFromTable( table ) {
+	totalComponents = totalComponents + componentsFromTable( table );
+	totalUnassigned = totalUnassigned + unassignedFromTable( table );
 }
 
 function componentsAndUnassignedFromPage( page ) {
@@ -90,6 +86,10 @@ function componentsAndUnassignedFromPages( pages ) {
 	return pages.map( ( page ) => {
 		return componentsAndUnassignedFromPage( page );
 	} );
+}
+
+function unassignedFromTable( table ) {
+	return table.$$( 'td=Unassigned' ).length;
 }
 
 describe( 'Developers/Maintainers', () => {
