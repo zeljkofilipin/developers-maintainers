@@ -63,7 +63,7 @@ function output( date, components, unassigned ) {
 }
 
 function outputDelimiter() {
-	console.log( '------------------------------------------------------------------------------------------------------------------------' );
+	console.log( '--------------------------------------------------------------------------------' );
 }
 
 describe( 'Developers/Maintainers', () => {
