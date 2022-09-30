@@ -73,6 +73,7 @@ function componentsFromTables( tables ) {
 
 function componentsAndUnassignedFromPage( page ) {
 	browser.url( `w/index.php?title=Developers/Maintainers&oldid=${page.oldid}` );
+	console.log( browser.getUrl() );
 	const tables = $$( 'table.sortable' );
 
 	return { components: componentsFromTables( tables ),
