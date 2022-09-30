@@ -85,8 +85,32 @@ function componentsAndUnassignedFromPages( pages ) {
 	} );
 }
 
+function thsFromTable( table ) {
+	return table.$$( 'th' ).map( ( th ) => {
+		return th.getText();
+	} );
+}
+
+function stewardColumnFromThs( ths ) {
+	if ( ths.includes( 'Steward' ) ) {
+		return ths.indexOf( 'Steward' );
+	} else if ( ths.includes( 'Code Stewards' ) ) {
+		return ths.indexOf( 'Code Stewards' );
+	}
+}
+
 function unassignedFromTable( table ) {
-	return table.$$( 'td=Unassigned' ).length;
+	const stewardColumn = stewardColumnFromThs( thsFromTable( table ) );
+	const zerosAndOnes = table.$( 'tbody' ).$$( 'tr' ).map( ( tr ) => {
+		const td = tr.$$( 'td' )[ stewardColumn ].getText();
+		if ( td === 'Unassigned' ) {
+			return 1;
+		} else { return 0; }
+	}
+	);
+	return zerosAndOnes.reduce( ( total, current ) => {
+		return total + current;
+	}, 0 );
 }
 
 function unassignedFromTables( tables ) {
