@@ -96,6 +96,10 @@ function stewardColumnFromThs( ths ) {
 		return ths.indexOf( 'Steward' );
 	} else if ( ths.includes( 'Code Stewards' ) ) {
 		return ths.indexOf( 'Code Stewards' );
+	} else if ( ths.includes( 'Code Steward' ) ) {
+		return ths.indexOf( 'Code Steward' );
+	} else {
+		return 0;
 	}
 }
 
