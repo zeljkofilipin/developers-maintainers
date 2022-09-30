@@ -1,6 +1,24 @@
 'use strict';
 
 const pages = [
+	{ date: '2017-01-28',
+		oldid: '2376817' },
+	{ date: '2017-04-01',
+		oldid: '2435161' },
+	{ date: '2017-07-06',
+		oldid: '2181417' },
+	{ date: '2017-10-03',
+		oldid: '2577123' },
+
+	{ date: '2018-01-02',
+		oldid: '2677753' },
+	{ date: '2018-04-03',
+		oldid: '2751248' },
+	{ date: '2018-07-05',
+		oldid: '2822198' },
+	{ date: '2018-10-03',
+		oldid: '2905633' },
+
 	{ date: '2019-01-03',
 		oldid: '3036807' },
 	{ date: '2019-04-24',
@@ -39,7 +57,7 @@ const pages = [
 ];
 
 function chart( x, y, yAxisTitle ) {
-	return `{{Graph:Chart|width=1200|height=100|xAxisTitle=Date|yAxisTitle=${yAxisTitle}|type=rect|showValues=|x=${x}|y=${y}}}`;
+	return `{{Graph:Chart|width=2000|height=100|xAxisTitle=Date|yAxisTitle=${yAxisTitle}|type=rect|showValues=|x=${x}|y=${y}}}`;
 }
 
 function percentage( components, unassigned ) {
