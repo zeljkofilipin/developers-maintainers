@@ -52,8 +52,8 @@ const pages = [
 		oldid: '5146289' },
 	{ date: '2022-07-05',
 		oldid: '5323169' },
-	{ date: '2022-09-20',
-		oldid: '5470936' }
+	{ date: '2022-10-03',
+		oldid: '5502573' }
 ];
 
 function chart( x, y, yAxisTitle ) {
