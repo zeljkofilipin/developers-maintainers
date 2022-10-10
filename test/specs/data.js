@@ -128,7 +128,7 @@ function unassignedFromTable( table ) {
 	const stewardColumn = stewardColumnFromThs( thsFromTable( table ) );
 	const zerosAndOnes = table.$( 'tbody' ).$$( 'tr' ).map( ( tr ) => {
 		const td = tr.$$( 'td' )[ stewardColumn ].getText();
-		if ( td === 'Unassigned' || td === '' ) {
+		if ( td === 'Unassigned' || td === '' || td === '???' ) {
 			return 1;
 		} else { return 0; }
 	}
