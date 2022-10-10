@@ -117,6 +117,8 @@ function stewardColumnFromThs( ths ) {
 		return ths.indexOf( 'Code Stewards' );
 	} else if ( ths.includes( 'Code Steward' ) ) {
 		return ths.indexOf( 'Code Steward' );
+	} else if ( ths.includes( 'Responsible Wikimedia team' ) ) {
+		return ths.indexOf( 'Responsible Wikimedia team' );
 	} else {
 		return 0;
 	}
