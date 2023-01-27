@@ -53,7 +53,10 @@ const pages = [
 	{ date: '2022-07-05',
 		oldid: '5323169' },
 	{ date: '2022-10-03',
-		oldid: '5502573' }
+		oldid: '5502573' },
+
+	{ date: '2023-01-08',
+		oldid: '5704549' }
 ];
 
 function chart( x, y, yAxisTitle ) {
