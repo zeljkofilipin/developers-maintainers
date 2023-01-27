@@ -1,5 +1,7 @@
 'use strict';
 
+const chartWidth = 1600; // 700
+
 const pages = [
 	{ date: '2017-01-28',
 		oldid: '2376817' },
@@ -59,8 +61,8 @@ const pages = [
 		oldid: '5704549' }
 ];
 
-function chart( x, y, yAxisTitle ) {
-	return `{{Graph:Chart|width=2000|height=100|xAxisTitle=Date|yAxisTitle=${yAxisTitle}|type=rect|showValues=|x=${x}|y=${y}}}`;
+function chart( x, y, yAxisTitle, width ) {
+	return `{{Graph:Chart|width=${width}|height=100|xAxisTitle=Date|yAxisTitle=${yAxisTitle}|type=rect|showValues=|x=${x}|y=${y}}}`;
 }
 
 function percentage( components, unassigned ) {
@@ -150,8 +152,8 @@ function unassignedFromTables( tables ) {
 describe( 'Developers/Maintainers', () => {
 	it( 'should create charts', () => {
 		const componentsAndUnassigned = componentsAndUnassignedFromPages( pages );
-		console.log( chart( x( pages ), yComponents( componentsAndUnassigned ), 'Components' ) );
-		console.log( chart( x( pages ), yUnassigned( componentsAndUnassigned ), 'Unassigned' ) );
-		console.log( chart( x( pages ), yUnassignedPercentage( componentsAndUnassigned ), 'Unassigned %' ) );
+		console.log( chart( x( pages ), yComponents( componentsAndUnassigned ), 'Components', chartWidth ) );
+		console.log( chart( x( pages ), yUnassigned( componentsAndUnassigned ), 'Unassigned', chartWidth ) );
+		console.log( chart( x( pages ), yUnassignedPercentage( componentsAndUnassigned ), 'Unassigned %', chartWidth ) );
 	} );
 } );
