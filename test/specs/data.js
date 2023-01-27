@@ -1,6 +1,6 @@
 'use strict';
 
-const chartWidth = 1600; // 700
+const chartWidth = 1600; // 700, 1200, 1600
 
 const pages = [
 	{ date: '2017-01-28',
